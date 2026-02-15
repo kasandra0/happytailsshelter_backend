@@ -1,5 +1,6 @@
 # Happy Tails Shelter Backend
 
+Members: Claudia V Dominguez
 ## Prerequisites
 
 - Prisma requires node.js versions 20.19+, 22.12+ or 24.0+
