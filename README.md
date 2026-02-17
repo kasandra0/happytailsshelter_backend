@@ -1,19 +1,38 @@
-# Happy Tails Shelter Backend
+# 🐾 Happy Tails Shelter – Frontend
 
-Members: Claudia V Dominguez
-Kasandra Wolf
-## Prerequisites
+Happy Tails Shelter is an Animal Shelter Foster Management application designed to reduce operational expenses by improving inventory tracking and supporting cost-efficient decision making.
 
-- Prisma requires node.js versions 20.19+, 22.12+ or 24.0+
+---
+## 👥 Team Leads
+- David kea
+- Johan Gilces
 
-## Getting Started
+## 👥 Team Members
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
+- Hisham Nabi  
+- Claudia V. Dominguez  
+- Kasandra Wolf  
+- Jim Liriano  
+- JJ Schrader Bachar  
 
-2. Run the development server:
-   ```bash
-   npm run dev
-   ```
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone <your-repo-url>
+cd happytailsshelter_frontend
+```
+
+### 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+### 3️⃣ Run the development server
+```bash
+npm run dev
+```
+Navigate to Local:   http://localhost:3000/
