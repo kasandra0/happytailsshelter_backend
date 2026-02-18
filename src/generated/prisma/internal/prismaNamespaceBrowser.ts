@@ -51,7 +51,12 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-
+  animal: 'animal',
+  foster_history: 'foster_history',
+  inventory_checkout: 'inventory_checkout',
+  inventory_item: 'inventory_item',
+  medical_log: 'medical_log',
+  user: 'user'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -68,4 +73,113 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const AnimalScalarFieldEnum = {
+  animal_id: 'animal_id',
+  microchip: 'microchip',
+  name: 'name',
+  date_of_birth: 'date_of_birth',
+  gender: 'gender',
+  color: 'color',
+  breed: 'breed',
+  species: 'species',
+  weight: 'weight',
+  status: 'status',
+  description: 'description',
+  photo_url: 'photo_url',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type AnimalScalarFieldEnum = (typeof AnimalScalarFieldEnum)[keyof typeof AnimalScalarFieldEnum]
+
+
+export const Foster_historyScalarFieldEnum = {
+  foster_history_id: 'foster_history_id',
+  animal_id: 'animal_id',
+  user_id: 'user_id',
+  start_date: 'start_date',
+  end_date: 'end_date',
+  staff_id: 'staff_id'
+} as const
+
+export type Foster_historyScalarFieldEnum = (typeof Foster_historyScalarFieldEnum)[keyof typeof Foster_historyScalarFieldEnum]
+
+
+export const Inventory_checkoutScalarFieldEnum = {
+  checkout_id: 'checkout_id',
+  animal_id: 'animal_id',
+  checkout_date: 'checkout_date',
+  return_date: 'return_date',
+  quantity: 'quantity',
+  inventory_item_id: 'inventory_item_id',
+  user_id: 'user_id'
+} as const
+
+export type Inventory_checkoutScalarFieldEnum = (typeof Inventory_checkoutScalarFieldEnum)[keyof typeof Inventory_checkoutScalarFieldEnum]
+
+
+export const Inventory_itemScalarFieldEnum = {
+  inventory_item_id: 'inventory_item_id',
+  name: 'name',
+  type: 'type',
+  quantity: 'quantity',
+  cost: 'cost',
+  lastupdated: 'lastupdated'
+} as const
+
+export type Inventory_itemScalarFieldEnum = (typeof Inventory_itemScalarFieldEnum)[keyof typeof Inventory_itemScalarFieldEnum]
+
+
+export const Medical_logScalarFieldEnum = {
+  log_history_id: 'log_history_id',
+  animal_id: 'animal_id',
+  type: 'type',
+  created_date: 'created_date',
+  user_id: 'user_id',
+  description: 'description',
+  start_date: 'start_date',
+  end_date: 'end_date'
+} as const
+
+export type Medical_logScalarFieldEnum = (typeof Medical_logScalarFieldEnum)[keyof typeof Medical_logScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  user_id: 'user_id',
+  first_name: 'first_name',
+  last_name: 'last_name',
+  email: 'email',
+  role: 'role',
+  phone_number: 'phone_number',
+  status: 'status',
+  created_at: 'created_at'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+} as const
+
+export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

@@ -8,4 +8,10 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/animal.js'
+export type * from './models/foster_history.js'
+export type * from './models/inventory_checkout.js'
+export type * from './models/inventory_item.js'
+export type * from './models/medical_log.js'
+export type * from './models/user.js'
 export type * from './commonInputTypes.js'

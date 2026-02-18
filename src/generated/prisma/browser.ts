@@ -17,4 +17,36 @@ import * as Prisma from './internal/prismaNamespaceBrowser.js'
 export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
-
+/**
+ * Model animal
+ * This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+ * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+ * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+ */
+export type animal = Prisma.animalModel
+/**
+ * Model foster_history
+ * 
+ */
+export type foster_history = Prisma.foster_historyModel
+/**
+ * Model inventory_checkout
+ * 
+ */
+export type inventory_checkout = Prisma.inventory_checkoutModel
+/**
+ * Model inventory_item
+ * 
+ */
+export type inventory_item = Prisma.inventory_itemModel
+/**
+ * Model medical_log
+ * 
+ */
+export type medical_log = Prisma.medical_logModel
+/**
+ * Model user
+ * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+ * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+ */
+export type user = Prisma.userModel
