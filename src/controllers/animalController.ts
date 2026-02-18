@@ -1,13 +1,27 @@
 import type { animalModel } from "../generated/prisma/models.js";
 import prisma from "../lib/prisma.js";
 
-// GET all animals
+export const createAnimal = async (req: any, res: any) => {
+  try {
+    const animal: animalModel = req.body;
+
+    const newAnimal = await prisma.animal.create({
+      data: animal,
+    });
+
+    res.status(201).json(newAnimal);
+  } catch (e: any) {
+    console.error(e);
+    res.status(400).json({ error: e.message });
+  }
+};
+
 export const getAllAnimals = async (req: any, res: any) => {
   try {
     const allAnimals = await prisma.animal.findMany();
     res.json(allAnimals);
-  } catch (error) {
-    console.error(error);
+  } catch (e: any) {
+    console.error(e);
     res.status(500).json({ error: "Failed to fetch animals" });
   }
 };
@@ -27,20 +41,49 @@ export const getAnimalById = async (req: any, res: any) => {
 
     res.status(200).json(animal);
   } catch (e: any) {
+    console.error(e);
     res.status(400).json({ error: e.message });
   }
 };
 
-export const createAnimal = async (req: any, res: any) => {
+export const updateAnimal = async (req: any, res: any) => {
   try {
+    const id = req.params.id;
+
     const animal: animalModel = req.body;
 
-    const newAnimal = await prisma.animal.create({
+    const updatedAnimal = await prisma.animal.update({
+      where: {
+        animal_id: Number(id),
+      },
       data: animal,
     });
-
-    res.status(201).json(newAnimal);
+    res.status(200).json(updatedAnimal);
   } catch (e: any) {
+    console.error(e);
     res.status(400).json({ error: e.message });
+  }
+};
+
+export const deleteAnimal = async (req: any, res: any) => {
+  try {
+    const id = req.params.id;
+
+    await prisma.animal.delete({
+      where: {
+        animal_id: Number(id),
+      },
+    });
+
+    res
+      .status(200)
+      .json({
+        wasSuccessful: true,
+        message: "Animal deleted successfully",
+        animalId: id,
+      });
+  } catch (e: any) {
+    console.error(e);
+    res.status(500).json({ error: e.message });
   }
 };
