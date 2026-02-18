@@ -13,7 +13,7 @@ Happy Tails Shelter is an Animal Shelter Foster Management application designed 
 - Claudia V. Dominguez  
 - Kasandra Wolf  
 - Jim Liriano  
-- JJ Schrader Bachar  
+- JJ SchraderBachar  
 
 ---
 
