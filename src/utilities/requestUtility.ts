@@ -1,5 +1,6 @@
 import type { inventory_item } from "../generated/prisma/client.js";
 import type { animalModel } from "../generated/prisma/models.js";
+import { AnimalStatusTypes } from "../types/animalStatusType.js";
 
 export class RequestUtility {
   private static WHITE_SPACE_REGEX = /\\s/g;
@@ -12,14 +13,21 @@ export class RequestUtility {
     if (animal === undefined) {
       return false;
     }
+
     const animalNameNotEmpty =
       animal?.name?.replace(this.WHITE_SPACE_REGEX, "").length > 0;
     const animalSpeciesNotEmpty =
       animal?.species?.replace(this.WHITE_SPACE_REGEX, "").length > 0;
+
     const animalStatusNotEmpty =
       animal?.status?.replace(this.WHITE_SPACE_REGEX, "").length > 0;
 
-    return animalNameNotEmpty && animalSpeciesNotEmpty && animalStatusNotEmpty;
+    return (
+      animalNameNotEmpty &&
+      animalSpeciesNotEmpty &&
+      animalStatusNotEmpty &&
+      AnimalStatusTypes.isValidAnimalStatus(animal?.status)
+    );
   }
 
   public static canCreateInventoryItem(inventoryItem: inventory_item) {
