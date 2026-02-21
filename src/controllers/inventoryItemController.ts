@@ -1,7 +1,6 @@
-// import { Inventory_itemScalarFieldEnum } from "../generated/prisma/internal/prismaNamespace.js";
-import { isNumberObject } from "node:util/types";
 import type { inventory_itemModel } from "../generated/prisma/models.js";
 import prisma from "../lib/prisma.js";
+import { RequestUtility } from "../utilities/requestUtility.js";
 
 export const createInventoryItem = async (req: any, res: any) => {
 
@@ -33,10 +32,10 @@ export const getAllInventoryItems = async (req: any, res: any) => {
 export const getInventoryItemById = async (req: any, res: any) => {
   try {
 
-    const id = Number(req.params.id);
+    const id = req.params.id as string;
 
-    if (isNaN(id)) {
-      return res.status(400).json({ error: "Invalid ID" });
+    if (!RequestUtility.canSearchForRecord(id)) {
+      throw new Error("Request Invalid");
     }
 
     const inventory_item = await prisma.inventory_item.findUnique({
@@ -58,21 +57,24 @@ export const getInventoryItemById = async (req: any, res: any) => {
 
 export const updateInventoryItem = async (req: any, res: any) => {
   try {
-    const id = Number(req.params.id);
+    const id = req.params.id;
 
-    if (isNaN(id)) {
-        return res.status(400).json({ error: "Invalid Id" });
+    const inventory_item: inventory_itemModel = req.body;
+
+    if (!RequestUtility.canSearchForRecord(id)) {
+      throw new Error("Request Invalid");
     }
 
-    const { name, type, quantity, cost } = req.body;
+    // const { name, type, quantity, cost } = req.body;
 
     const updatedInventoryItem = await prisma.inventory_item.update({
-    where: { inventory_item_id: Number(id) },
-    data:  {name, type, quantity, cost},
+    where: {
+      inventory_item_id: Number(id)
+    },
+      data: inventory_item,
     });
     res.status(200).json(updatedInventoryItem);
   } 
-  
   catch (e: any) {
     console.error(e);
     res.status(400).json({ error: e.message });
@@ -82,7 +84,10 @@ export const updateInventoryItem = async (req: any, res: any) => {
 export const deleteInventoryItem = async (req: any, res: any) => {
   try {
     const id = req.params.id;
-    if (isNaN(id)) return res.status(400).json({ error: "Invalid ID" });
+
+    if (!RequestUtility.canSearchForRecord(id)) {
+      throw new Error("Request Invalid");
+    }
 
     await prisma.inventory_item.delete({
       where: {
