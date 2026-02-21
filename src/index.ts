@@ -4,6 +4,7 @@ import prisma from "./lib/prisma.js";
 
 import animalRouter from "./routes/animalRoutes.js";
 import inventoryItemRouter from "./routes/inventoryItemRoutes.js";
+import fosterHistoryRouter from "./routes/fosterHistoryRouter.js";
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ app.use(express.json());
 
 app.use("/animal", animalRouter);
 app.use("/inventory_item", inventoryItemRouter);
+
+app.use("/fosterHistory", fosterHistoryRouter);
 
 app.get("/test", async (req, res) => {
   try {
