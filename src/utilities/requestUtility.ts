@@ -1,4 +1,7 @@
-import type { inventory_item } from "../generated/prisma/client.js";
+import type {
+  foster_history,
+  inventory_item,
+} from "../generated/prisma/client.js";
 import type { animalModel } from "../generated/prisma/models.js";
 import { AnimalStatusTypes } from "../types/animalStatusType.js";
 
@@ -6,7 +9,7 @@ export class RequestUtility {
   private static WHITE_SPACE_REGEX = /\\s/g;
 
   public static canSearchForRecord(id: string) {
-    return id !== undefined && Number.isNaN(id);
+    return id !== undefined && !Number.isNaN(id);
   }
 
   public static canCreateAnimal(animal: animalModel) {
@@ -42,5 +45,19 @@ export class RequestUtility {
       inventoryItem?.type?.replace(this.WHITE_SPACE_REGEX, "").length > 0;
 
     return itemNameNotEmpty && itemTypeNotEmpty;
+  }
+
+  public static canCreateFosterHistoryRecord(fosterHistory: foster_history) {
+    if (fosterHistory === undefined) {
+      return false;
+    }
+
+    const validAnimalId = fosterHistory?.animal_id > 0;
+
+    const validUserId = fosterHistory?.user_id > 0;
+
+    const validStaffId = fosterHistory?.staff_id > 0;
+
+    return validAnimalId && validUserId && validStaffId;
   }
 }

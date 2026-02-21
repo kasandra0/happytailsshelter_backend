@@ -3,6 +3,7 @@ import express from "express";
 import prisma from "./lib/prisma.js";
 
 import animalRouter from "./routes/animalRoutes.js";
+import fosterHistoryRouter from "./routes/fosterHistoryRouter.js";
 
 dotenv.config();
 
@@ -11,6 +12,8 @@ const app = express();
 app.use(express.json());
 
 app.use("/animal", animalRouter);
+
+app.use("/fosterHistory", fosterHistoryRouter);
 
 app.get("/test", async (req, res) => {
   try {
