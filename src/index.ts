@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
+import cors from "cors";
 import prisma from "./lib/prisma.js";
 
 import animalRouter from "./routes/animalRoutes.js";
@@ -9,7 +10,15 @@ import fosterHistoryRouter from "./routes/fosterHistoryRouter.js";
 dotenv.config();
 
 const app = express();
+// Configure CORS to allow frontend's origin
+const corsOptions = {
+  origin: 'http://localhost:5173', // Your frontend's URL
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed HTTP methods
+  credentials: true, // If you need to send cookies/authorization headers
+  optionsSuccessStatus: 204 // Some legacy browsers (IE11, various SmartTVs) choke on 200
+};
 
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/animal", animalRouter);
