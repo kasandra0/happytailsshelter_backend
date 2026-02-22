@@ -6,7 +6,7 @@ import {
   getFosterHistoryRecordsForAnimal,
   getFosterHistoryRecordsForUser,
   updateFosterHistoryRecord,
-} from "../controllers/fosterhisotryController.js";
+} from "../controllers/fosterHistoryRouter.js";
 
 const fosterHistoryRouter = express.Router();
 

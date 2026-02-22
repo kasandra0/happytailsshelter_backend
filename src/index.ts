@@ -1,74 +1,10 @@
 import dotenv from "dotenv";
-import express from "express";
-import cors from "cors";
-import prisma from "./lib/prisma.js";
-
-import animalRouter from "./routes/animalRoutes.js";
-import inventoryItemRouter from "./routes/inventoryItemRoutes.js";
-import fosterHistoryRouter from "./routes/fosterHistoryRouter.js";
+import app from "./app.js";
 
 dotenv.config();
-
-const app = express();
-// Configure CORS to allow frontend's origin
-const corsOptions = {
-  origin: 'http://localhost:5173', // Your frontend's URL
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed HTTP methods
-  credentials: true, // If you need to send cookies/authorization headers
-  optionsSuccessStatus: 204 // Some legacy browsers (IE11, various SmartTVs) choke on 200
-};
-
-app.use(cors(corsOptions));
-app.use(express.json());
-
-app.use("/animal", animalRouter);
-app.use("/inventory_item", inventoryItemRouter);
-
-app.use("/fosterHistory", fosterHistoryRouter);
-
-app.get("/test", async (req, res) => {
-  try {
-    console.log("DB_USER:", process.env.DB_USER);
-    console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
-    console.log("DB_PASSWORD type:", typeof process.env.DB_PASSWORD);
-
-    const result = await prisma.$queryRaw`SELECT 1`;
-    res.json({ db: result });
-    console.log(result);
-  } catch (error: any) {
-    console.error("FULL ERROR:", error);
-    res.status(500).json({
-      message: error.message,
-      code: error.code,
-      meta: error.meta,
-    });
-  }
-});
-
-// GET all users
-app.get("/user", async (req, res) => {
-  try {
-    const users = await prisma.user.findMany();
-    res.json(users);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to fetch users" });
-  }
-});
-
-// GET all inventory items
-app.get("/inventory_item", async (req, res) => {
-  try {
-    const inventoryItem = await prisma.inventory_item.findMany();
-    res.json(inventoryItem);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to fetch iventory items" });
-  }
-});
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Server running at port: ${PORT}`);
+    console.log(`Server running at port: ${PORT}`);
 });

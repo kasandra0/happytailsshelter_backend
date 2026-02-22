@@ -1,19 +1,19 @@
 import { PrismaPg } from "@prisma/adapter-pg";
 import dotenv from "dotenv";
 import { Pool } from "pg";
-import { PrismaClient } from "../generated/prisma/client.js";
+import { PrismaClient } from '@prisma/client';
 
 dotenv.config();
 
 const pool = new Pool({
-  host: "aws-1-us-east-1.pooler.supabase.com",
-  port: 5432,
-  user: "postgres.tyayuesxvzdpxzsfxdkx",
-  password: process.env.DB_PASSWORD,
-  database: "postgres",
-  ssl: {
-    rejectUnauthorized: false,
-  },
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    ssl: {
+        rejectUnauthorized: false,
+    },
 });
 
 const adapter = new PrismaPg(pool);

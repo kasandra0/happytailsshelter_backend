@@ -1,6 +1,5 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -33,10 +32,10 @@ model animal {
 model foster_history {
   foster_history_id                  Int       @id @default(autoincrement())
   animal_id                          Int
-  user_id                            Int
+  user_id                            BigInt
   start_date                         DateTime? @default(now()) @db.Timestamp(6)
   end_date                           DateTime? @db.Timestamp(6)
-  staff_id                           Int
+  staff_id                           BigInt
   animal                             animal    @relation(fields: [animal_id], references: [animal_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_animal")
   user_foster_history_staff_idTouser user      @relation("foster_history_staff_idTouser", fields: [staff_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_staff")
   user_foster_history_user_idTouser  user      @relation("foster_history_user_idTouser", fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user")
@@ -49,7 +48,7 @@ model inventory_checkout {
   return_date       DateTime?      @db.Date
   quantity          Int?
   inventory_item_id Int
-  user_id           Int?
+  user_id           BigInt?
   animal            animal?        @relation(fields: [animal_id], references: [animal_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_animal")
   inventory_item    inventory_item @relation(fields: [inventory_item_id], references: [inventory_item_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_inventory")
   user              user?          @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user")
@@ -70,7 +69,7 @@ model medical_log {
   animal_id      Int
   type           Int?
   created_date   DateTime  @db.Date
-  user_id        Int
+  user_id        BigInt
   description    String?   @db.VarChar(250)
   start_date     DateTime? @db.Date
   end_date       DateTime? @db.Date
@@ -81,7 +80,7 @@ model medical_log {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model user {
-  user_id                                      Int               @id @default(autoincrement())
+  user_id                                      BigInt               @id @default(autoincrement())
   first_name                                   String               @db.VarChar
   last_name                                    String?              @db.VarChar
   email                                        String               @unique @db.VarChar
