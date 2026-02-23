@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import * as inventoryItemService from "../services/inventoryitem.service.js";
+import * as inventoryItemService from "../services/inventoryItem.service.js";
 import { successResponse } from "../utils/response.js";
 
 export const getAll= async (req: Request, res: Response) => {
@@ -31,6 +31,6 @@ export async function create(req: Request, res: Response) {
     const inventoryItem = await inventoryItemService.createInventoryItems(req.body);
 
     res.status(201).json(
-        successResponse("Animal created successfully", inventoryItem)
+        successResponse("Inventory item created successfully", inventoryItem)
     );
 }
