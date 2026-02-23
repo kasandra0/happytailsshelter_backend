@@ -22,6 +22,7 @@ app.use(express.json());
 
 app.use("/api/animals", animalRouter);
 app.use("/api/inventory-items", inventoryItemRouter);
+app.use("/api/inventory-checkout", inventoryCheckoutRouter);
 app.use("/api/foster-history", fosterHistoryRouter);
 app.use("/api/auth", authRouter);
 
