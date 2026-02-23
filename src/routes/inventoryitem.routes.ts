@@ -1,18 +1,10 @@
-import express from "express";
-import {
-  createInventoryItem,
-  deleteInventoryItem,
-  getAllInventoryItems,
-  getInventoryItemById,
-  updateInventoryItem,
-} from "../controllers/inventoryItemController.js";
+import { Router } from "express";
+import * as inventoryItemController from "../controllers/inventoryItem.Controller.js";
 
-const inventoryItemRouter = express.Router();
+const router = Router();
 
-inventoryItemRouter.post("/", createInventoryItem);
-inventoryItemRouter.get("/", getAllInventoryItems);
-inventoryItemRouter.get("/:id", getInventoryItemById);
-inventoryItemRouter.put("/:id", updateInventoryItem);
-inventoryItemRouter.delete("/:id", deleteInventoryItem);
+router.get("/", inventoryItemController.getAll);
+router.get("/:id", inventoryItemController.getById);
+router.post("/", inventoryItemController.create);
 
-export default inventoryItemRouter;
+export default router;
