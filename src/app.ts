@@ -3,12 +3,13 @@ import express from "express";
 
 import animalRouter from "./routes/animal.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import userRouter from "./routes/user.routes.js";
 import inventoryCheckoutRouter from "./routes/inventorycheckout.routes.js";
 import inventoryItemRouter from "./routes/inventoryitem.routes.js";
 import medicalLogRouter from "./routes/medicallog.routes.js";
+import fosterHistoryRouter from "./routes/fosterHistory.routes.js";
 
 import { errorMiddleware } from "./middleware/error.middleware.js";
-import fosterHistoryRouter from "./routes/fosterHistory.routes.js";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use("/api/inventory-checkout", inventoryCheckoutRouter);
 app.use("/api/foster-history", fosterHistoryRouter);
 app.use("/api/medical-log", medicalLogRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);
 
 app.use(errorMiddleware);
 
