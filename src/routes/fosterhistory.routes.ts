@@ -1,20 +1,25 @@
 import express from "express";
-import {
-  createFosterHistoryRecord,
-  deleteFosterHistoryRecord,
-  getAllFosterHistoryRecords,
-  getFosterHistoryRecordsForAnimal,
-  getFosterHistoryRecordsForUser,
-  updateFosterHistoryRecord,
-} from "../controllers/fosterHistoryRouter.js";
+import * as fosterHistoryController from "../controllers/fosterHistory.controller.js";
 
 const fosterHistoryRouter = express.Router();
 
-fosterHistoryRouter.post("/", createFosterHistoryRecord);
-fosterHistoryRouter.get("/", getAllFosterHistoryRecords);
-fosterHistoryRouter.get("/user/:id", getFosterHistoryRecordsForUser);
-fosterHistoryRouter.get("/animal/:id", getFosterHistoryRecordsForAnimal);
-fosterHistoryRouter.put("/:id", updateFosterHistoryRecord);
-fosterHistoryRouter.delete("/:id", deleteFosterHistoryRecord);
+fosterHistoryRouter.post("/", fosterHistoryController.create);
+fosterHistoryRouter.get("/", fosterHistoryController.getAll);
+fosterHistoryRouter.get(
+  "/user/:id",
+  fosterHistoryController.getFosterHistoryRecordsForUser
+);
+fosterHistoryRouter.get(
+  "/animal/:id",
+  fosterHistoryController.getFosterHistoryRecordsForAnimal
+);
+fosterHistoryRouter.put(
+  "/:id",
+  fosterHistoryController.updateFosterHistoryRecord
+);
+fosterHistoryRouter.delete(
+  "/:id",
+  fosterHistoryController.deleteFosterHistoryRecord
+);
 
 export default fosterHistoryRouter;

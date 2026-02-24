@@ -1,21 +1,20 @@
-import express from "express";
 import cors from "cors";
+import express from "express";
 
 import animalRouter from "./routes/animal.routes.js";
-import inventoryItemRouter from "./routes/inventoryitem.routes.js";
-import inventoryCheckoutRouter from "./routes/inventoryCheckout.routes.js";
-import fosterHistoryRouter from "./routes/fosterhistory.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import fosterHistoryRouter from "./routes/fosterhistory.routes.js";
+import inventoryItemRouter from "./routes/inventoryitem.routes.js";
 
 import { errorMiddleware } from "./middleware/error.middleware.js";
 
 const app = express();
 
 const corsOptions = {
-    origin: "http://localhost:5173",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-    optionsSuccessStatus: 204,
+  origin: "http://localhost:5173",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));
