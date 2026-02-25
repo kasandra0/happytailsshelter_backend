@@ -1,7 +1,7 @@
 import express from "express";
 import * as fosterHistoryController from "../controllers/fosterHistory.controller.js";
 
-const fosterHistoryRouter = express.Router();
+const router = Router();
 
 fosterHistoryRouter.post("/", fosterHistoryController.create);
 fosterHistoryRouter.get("/", fosterHistoryController.getAll);
@@ -22,4 +22,4 @@ fosterHistoryRouter.delete(
   fosterHistoryController.deleteFosterHistoryRecord
 );
 
-export default fosterHistoryRouter;
+export default router;
