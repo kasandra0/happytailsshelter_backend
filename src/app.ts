@@ -2,13 +2,13 @@ import cors from "cors";
 import express from "express";
 
 import animalRouter from "./routes/animal.routes.js";
-import inventoryItemRouter from "./routes/inventoryitem.routes.js";
-import inventoryCheckoutRouter from "./routes/inventorycheckout.routes.js";
-import medicalLogRouter from "./routes/medicallog.routes.js";
-import fosterHistoryRouter from "./routes/fosterhistory.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import inventoryCheckoutRouter from "./routes/inventorycheckout.routes.js";
+import inventoryItemRouter from "./routes/inventoryitem.routes.js";
+import medicalLogRouter from "./routes/medicallog.routes.js";
 
 import { errorMiddleware } from "./middleware/error.middleware.js";
+import fosterHistoryRouter from "./routes/fosterHistory.routes.js";
 
 const app = express();
 
