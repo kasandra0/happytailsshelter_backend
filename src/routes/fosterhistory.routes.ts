@@ -1,6 +1,5 @@
 import { Router } from "express";
 import * as fosterHistoryController from "../controllers/fosterHistory.controller.js";
-
 const fosterHistoryRouter = Router();
 
 fosterHistoryRouter.post("/", fosterHistoryController.create);
