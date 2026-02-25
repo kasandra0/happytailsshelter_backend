@@ -16,3 +16,14 @@ export async function createInventoryCheckout(data: any) {
     });
 }
 
+export async function updateInventoryCheckoutById(id: number, data: any) {
+    return prisma.inventory_checkout.update({
+        where: { checkout_id: id }, data: data,
+    });
+}
+
+export async function deleteInventoryCheckoutEntry(id: number) {
+    return prisma.inventory_checkout.delete({
+        where: { checkout_id: id },
+    });
+}

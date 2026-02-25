@@ -34,3 +34,23 @@ export async function create(req: Request, res: Response) {
         successResponse("Log entry created successfully", logEntries)
     );
 }
+
+export async function updateMedicalLogRecord(req: Request, res: Response) {
+  const id = Number(req.params.id);
+
+  const updatedLogEntry = await medicallogService.updateMedicalLog(id, req.body);
+
+  res.status(201).json(
+    successResponse("Medical log updated successfully", updatedLogEntry)
+  );
+}
+
+export async function deleteMedicalLogRecord(req: Request, res: Response) {
+  const id = Number(req.params.id);
+
+  const updatedLogEntry = await medicallogService.deleteMedicalLog(id);
+
+  res.status(201).json(
+    successResponse("Medical log entry deleted successfully", updatedLogEntry)
+  );
+}

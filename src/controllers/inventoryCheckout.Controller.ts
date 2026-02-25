@@ -34,3 +34,23 @@ export async function create(req: Request, res: Response) {
         successResponse("Inventory Checkout entry created successfully", inventoryCheckout)
     );
 }
+
+export async function updateInventoryCheckoutRecord(req: Request, res: Response) {
+  const id = Number(req.params.id);
+
+  const updatedItemCheckoutEntry = await inventoryCheckoutService.updateInventoryCheckoutById(id, req.body);
+
+  res.status(201).json(
+    successResponse("Inventry checkout entry updated successfully", updatedItemCheckoutEntry)
+  );
+}
+
+export async function deleteInventoryCheckoutRecord(req: Request, res: Response) {
+  const id = Number(req.params.id);
+
+  await inventoryCheckoutService.deleteInventoryCheckoutEntry(id);
+
+  res.status(201).json(
+    successResponse("Inventory checkout entry deleted successfully")
+  );
+}
