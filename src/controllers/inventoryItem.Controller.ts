@@ -26,11 +26,30 @@ export async function getById(req: Request, res: Response) {
     );
 }
 
-
 export async function create(req: Request, res: Response) {
     const inventoryItem = await inventoryItemService.createInventoryItems(req.body);
 
     res.status(201).json(
         successResponse("Inventory item created successfully", inventoryItem)
     );
+}
+
+export async function updateInventoryItemRecord(req: Request, res: Response) {
+  const id = Number(req.params.id);
+
+  const updatedItemEntry = await inventoryItemService.updateInventoryItem(id, req.body);
+
+  res.status(201).json(
+    successResponse("Inventry item updated successfully", updatedItemEntry)
+  );
+}
+
+export async function deleteInventoryItemRecord(req: Request, res: Response) {
+  const id = Number(req.params.id);
+
+  await inventoryItemService.deleteInventoryItem(id);
+
+  res.status(201).json(
+    successResponse("Inventory item entry deleted successfully")
+  );
 }

@@ -16,3 +16,15 @@ export async function createInventoryItems(data: any) {
     });
 }
 
+export async function updateInventoryItem(id: number, data: any) {
+    return prisma.inventory_item.update({
+        where: { inventory_item_id: id }, data
+    });
+}
+
+export async function deleteInventoryItem(id: number) {
+    return prisma.inventory_item.delete({
+        where: { inventory_item_id: id },
+    });
+}
+

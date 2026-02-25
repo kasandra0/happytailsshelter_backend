@@ -1,10 +1,12 @@
 import { Router } from "express";
-import * as inventoryCheckoutController from "../controllers/inventoryCheckout.Controller.js"
+import * as inventoryCheckoutController from "../controllers/inventorycheckout.Controller.js"
 
 const router = Router();
 
 router.get("/", inventoryCheckoutController.getAll);
 router.get("/:id", inventoryCheckoutController.getById);
 router.post("/", inventoryCheckoutController.create);
+router.put("/", inventoryCheckoutController.updateInventoryCheckoutRecord);
+router.delete("/", inventoryCheckoutController.deleteInventoryCheckoutRecord);
 
 export default router;
