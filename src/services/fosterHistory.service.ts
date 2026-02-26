@@ -15,9 +15,11 @@ export async function getFosterHistoryByAnimalId(id: number) {
   });
 }
 export async function getFosterHistoryByUserId(id: number) {
-  return prisma.foster_history.findMany({
-    where: { user_id: id },
-  });
+  const safeId = Number(id);
+  if (isNaN(safeId)) {
+    throw new Error("Invalid user ID");
+  }
+  return await prisma.$queryRaw`select*from foster_history Left join animal on foster_history.animal_id = animal.animal_id where foster_history.user_id=${safeId} order by animal.name`;
 }
 
 export async function createFosterHistoryRecord(data: any) {
