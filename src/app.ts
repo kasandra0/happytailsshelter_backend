@@ -10,6 +10,7 @@ import medicalLogRouter from "./routes/medicallog.routes.js";
 import fosterHistoryRouter from "./routes/fosterhistory.routes.js";
 
 import { errorMiddleware } from "./middleware/error.middleware.js";
+import { setupSwagger } from "./swagger.js";
 
 const app = express();
 
@@ -22,6 +23,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+
+setupSwagger(app, "/api/api-docs");
 
 app.use("/api/animals", animalRouter);
 app.use("/api/inventory-items", inventoryItemRouter);
