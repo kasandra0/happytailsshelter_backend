@@ -88,6 +88,7 @@ model user {
   phone_number                                 String?              @db.VarChar
   status                                       String               @default("'A'") @db.VarChar
   created_at                                   DateTime?            @default(now()) @db.Timestamp(6)
+  password                                     String               @db.VarChar
   foster_history_foster_history_staff_idTouser foster_history[]     @relation("foster_history_staff_idTouser")
   foster_history_foster_history_user_idTouser  foster_history[]     @relation("foster_history_user_idTouser")
   inventory_checkout                           inventory_checkout[]
