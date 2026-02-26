@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as inventoryCheckoutController from "../controllers/inventorycheckout.Controller.js"
+import * as inventoryCheckoutController from "../controllers/inventoryCheckout2.controller.js"
 
 const router = Router();
 
