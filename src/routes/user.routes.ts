@@ -60,7 +60,7 @@ router.get("/", userController.getAll);
  *       404:
  *         description: User not found
  */
-router.get("/me", userController.getMe);
+router.get("/me", requireAuth, userController.getMe);
 
 /**
  * @swagger
