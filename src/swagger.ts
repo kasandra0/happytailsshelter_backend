@@ -18,6 +18,21 @@ const options: swaggerJsdoc.Options = {
                     bearerFormat: "JWT",
                 },
             },
+            schemas: {
+                User: {
+                    type: "object",
+                    properties: {
+                        user_id: { type: "string", example: "1" },
+                        first_name: { type: "string", example: "First Name" },
+                        last_name: { type: "string", example: "Last Name" },
+                        email: { type: "string", example: "Email" },
+                        role: { type: "integer", example: 2 },
+                        phone_number: { type: "string", example: "Phone Number" },
+                        status: { type: "string", example: "A" },
+                        created_at: { type: "string", format: "date-time" },
+                    },
+                },
+            },
         },
         security: [
             {
