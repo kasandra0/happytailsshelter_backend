@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as authController from "../controllers/auth.controller.js";
+import { requireAuth } from "../middleware/auth.middleware.js";
 
 const router = Router();
 
@@ -54,6 +55,7 @@ const router = Router();
  *         description: User account is inactive
  */
 router.post("/login", authController.login);
+router.post("/logout", requireAuth, authController.logout);
 
 /**
  * @swagger

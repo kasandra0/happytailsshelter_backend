@@ -19,7 +19,7 @@ export async function getFosterHistoryByUserId(id: number) {
   if (isNaN(safeId)) {
     throw new Error("Invalid user ID");
   }
-  return await prisma.$queryRaw`select*from foster_history Left join animal on foster_history.animal_id = animal.animal_id where foster_history.user_id=${safeId} order by animal.name`;
+  const fosterHistory = await prisma.$queryRaw`select*from foster_history Left join animal on foster_history.animal_id = animal.animal_id where foster_history.user_id=${safeId} order by animal.name`;
 }
 
 export async function createFosterHistoryRecord(data: any) {

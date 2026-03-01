@@ -17,3 +17,8 @@ export async function register(req: Request, res: Response): Promise<void> {
 
     res.status(201).json(successResponse("Registration successful", result));
 }
+
+export async function logout(req: Request, res: Response): Promise<void> {
+    res.status(201).json(successResponse("Logged out successfully", null));
+}
+
