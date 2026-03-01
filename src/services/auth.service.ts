@@ -29,7 +29,7 @@ export async function registerUser(
             password: hashedPassword,
             first_name: firstName,
             last_name: lastName ?? null,
-            role: 2,
+            role: 1,//foster parent role
             status: "A",
         },
     });
