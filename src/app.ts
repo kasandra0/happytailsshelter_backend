@@ -31,7 +31,7 @@ app.use("/api/inventory-items", inventoryItemRouter);
 app.use("/api/inventory-checkout", inventoryCheckoutRouter);
 app.use("/api/foster-history", fosterHistoryRouter);
 app.use("/api/medical-log", medicalLogRouter);
-app.use("/api/auth/register", authRouter);
+app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 
 app.use(errorMiddleware);
