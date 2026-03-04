@@ -29,9 +29,37 @@ export async function getInventoryCheckoutById(id: number) {
 }
 
 export async function createInventoryCheckout(data: any) {
-  return prisma.inventory_checkout.create({
-    data,
+  const { inventory_item_id, quantity, ...rest } = data;
+
+  // fetch current item
+  const item = await prisma.inventory_item.findUnique({
+    where: { inventory_item_id },
   });
+
+  if (!item) {
+    throw new Error("Inventory item not found");
+  }
+
+  if (item.quantity === null || item.quantity === undefined) {
+    throw new Error("Item has no quantity tracked");
+  }
+
+  if (item.quantity < quantity) {
+    throw new Error(
+      `Not enough stock. Requested ${quantity} but only ${item.quantity} available.`
+    );
+  }
+
+  // run both operations in a transaction so they succeed or fail together
+  return prisma.$transaction([
+    prisma.inventory_checkout.create({
+      data: { inventory_item_id, quantity, ...rest },
+    }),
+    prisma.inventory_item.update({
+      where: { inventory_item_id },
+      data: { quantity: item.quantity - quantity },
+    }),
+  ]);
 }
 
 export async function updateInventoryCheckoutById(id: number, data: any) {
