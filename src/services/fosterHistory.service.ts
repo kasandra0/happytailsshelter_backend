@@ -13,6 +13,7 @@ export async function getFosterHistoryById(id: number) {
   return prisma.foster_history.findUnique({
     include: {
       user_foster_history_staff_idTouser: true,
+      animal: true,
     },
     where: { foster_history_id: id },
   });
@@ -22,6 +23,7 @@ export async function getFosterHistoryByAnimalId(id: number) {
     include: {
       user_foster_history_user_idTouser: true,
       user_foster_history_staff_idTouser: true,
+      animal: true,
     },
     where: { animal_id: id },
   });
@@ -31,6 +33,7 @@ export async function getFosterHistoryByUserId(id: number) {
     include: {
       user_foster_history_user_idTouser: true,
       user_foster_history_staff_idTouser: true,
+      animal: true,
     },
     where: { user_id: id },
   });
