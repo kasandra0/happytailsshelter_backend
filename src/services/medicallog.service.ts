@@ -28,3 +28,10 @@ export async function deleteMedicalLog(id: number) {
     where: { log_history_id: id },
   });
 }
+
+export async function getMedicalLogsByAnimalId(animalId: number) {
+  return prisma.medical_log.findMany({
+    where: { animal_id: animalId },
+    orderBy: { created_date: "desc" },
+  });
+}
