@@ -7,7 +7,6 @@ router.get("/", inventoryItemController.getAll);
 router.get("/:id", inventoryItemController.getById);
 router.post("/", inventoryItemController.create);
 router.put("/:id", inventoryItemController.updateInventoryItemRecord);
-router.delete("/:id",inventoryItemController.deleteInventoryItemRecord);
-
+router.delete("/:id", inventoryItemController.deleteInventoryItemRecord);
 
 export default router;
