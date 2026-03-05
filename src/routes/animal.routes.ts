@@ -22,6 +22,9 @@ const router = Router();
  */
 router.get("/", animalController.getAll);
 
+router.get("/:id/medical-logs", animalController.getMedicalLogs);
+router.post("/:id/medical-logs", animalController.createMedicalLog);
+
 /**
  * @openapi
  * /api/animals/{id}:
