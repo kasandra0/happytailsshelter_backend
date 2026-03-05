@@ -32,7 +32,7 @@ export async function getFosterHistoryByUserId(id: number) {
       user_foster_history_user_idTouser: true,
       user_foster_history_staff_idTouser: true,
     },
-    where: { animal_id: id },
+    where: { user_id: id },
   });
 }
 
