@@ -29,7 +29,7 @@ export async function getInventoryCheckoutById(id: number) {
 }
 
 export async function createInventoryCheckout(data: any) {
-  const { inventory_item_id, quantity, ...rest } = data;
+  const { inventory_item_id, quantity, checkout_id, ...rest } = data;
 
   // fetch current item
   const item = await prisma.inventory_item.findUnique({
