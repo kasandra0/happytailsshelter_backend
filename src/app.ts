@@ -11,6 +11,7 @@ import fosterHistoryRouter from "./routes/fosterhistory.routes.js";
 
 import { errorMiddleware } from "./middleware/error.middleware.js";
 import { setupSwagger } from "./swagger.js";
+import chatRoutes from "./routes/chat.routes.js";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/api/foster-history", fosterHistoryRouter);
 app.use("/api/medical-log", medicalLogRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
+app.use("/api/chat", chatRoutes);
 
 app.use(errorMiddleware);
 
