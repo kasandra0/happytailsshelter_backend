@@ -63,9 +63,23 @@ export async function createInventoryCheckout(data: any) {
 }
 
 export async function updateInventoryCheckoutById(id: number, data: any) {
+  const {
+    animal_id,
+    checkout_date,
+    quantity,
+    inventory_item_id,
+    user_id
+  } = data;
+
   return prisma.inventory_checkout.update({
     where: { checkout_id: id },
-    data: data,
+    data: {
+      animal_id,
+      checkout_date,
+      quantity,
+      inventory_item_id,
+      user_id
+    }
   });
 }
 
