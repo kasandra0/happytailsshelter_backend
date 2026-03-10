@@ -203,5 +203,6 @@ router.put("/:id", inventoryItemController.updateInventoryItemRecord);
  */
 router.delete("/:id",inventoryItemController.deleteInventoryItemRecord);
 
+router.delete("/:id", inventoryItemController.deleteInventoryItemRecord);
 
 export default router;

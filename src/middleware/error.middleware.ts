@@ -6,8 +6,6 @@ export function errorMiddleware(
     res: Response,
     next: NextFunction
 ) {
-    //add logger here
-    console.error(err);
 
     res.status(err.status || 500).json({
         success: false,

@@ -11,11 +11,12 @@ import fosterHistoryRouter from "./routes/fosterhistory.routes.js";
 
 import { errorMiddleware } from "./middleware/error.middleware.js";
 import { setupSwagger } from "./swagger.js";
+import chatRoutes from "./routes/chat.routes.js";
 
 const app = express();
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173", "http://localhost:5174"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
@@ -33,6 +34,7 @@ app.use("/api/foster-history", fosterHistoryRouter);
 app.use("/api/medical-log", medicalLogRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
+app.use("/api/chat", chatRoutes);
 
 app.use(errorMiddleware);
 

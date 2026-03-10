@@ -1,7 +1,11 @@
 import prisma from "../lib/prisma.js";
 
 export async function getAllAnimals() {
-  return prisma.animal.findMany();
+  return prisma.animal.findMany({
+    orderBy: {
+      updated_at: "desc",
+    },
+  });
 }
 
 export async function getAnimalById(id: number) {

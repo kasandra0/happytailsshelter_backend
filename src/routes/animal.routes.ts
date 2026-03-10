@@ -37,6 +37,9 @@ const router = Router();
  */
 router.get("/", animalController.getAll);
 
+router.get("/:id/medical-logs", animalController.getMedicalLogs);
+router.post("/:id/medical-logs", animalController.createMedicalLog);
+
 /**
  * @swagger
  * /api/animals/{id}:
