@@ -1,8 +1,27 @@
 import { generateAIResponse } from "./ai.service.js";
 import { getAllAnimals } from "./animal.service.js";
+import { getAllIMedicalLog, getMedicalLogsByAnimalId } from "./medicallog.service.js";
 
 function detectIntent(message: string) {
   const text = message.toLowerCase();
+
+  if (
+    text.includes("medical history") ||
+    text.includes("medical log") ||
+    text.includes("allergy") ||
+    text.includes("allergies") ||
+    text.includes("vaccination") ||
+    text.includes("vaccinations") ||
+    text.includes("vaccine") ||
+    text.includes("vaccines") ||
+    text.includes("medication") ||
+    text.includes("medications") ||
+    text.includes("vet") ||
+    text.includes("vet visit") ||
+    text.includes("health")
+  ) {
+    return "medical";
+  }
 
   if (text.includes("adopt") || text.includes("adoption")) return "adoption";
   if (text.includes("volunteer")) return "volunteer";
@@ -26,6 +45,29 @@ function detectIntent(message: string) {
   return "ai";
 }
 
+function findAnimalFromMessage(message: string, animals: any[]) {
+  const text = message.toLowerCase();
+
+  return animals.find((animal) =>
+    text.includes(animal.name?.toLowerCase())
+  );
+}
+
+function formatMedicalLogType(type: number | null | undefined) {
+  switch (type) {
+    case 1:
+      return "Vaccination";
+    case 2:
+      return "Medication";
+    case 3:
+      return "Treatment";
+    case 4:
+      return "Checkup";
+    default:
+      return "Medical entry";
+  }
+}
+
 export async function getChatReply(message: string) {
   try {
     message = message.trim();
@@ -33,7 +75,7 @@ export async function getChatReply(message: string) {
     if (!message || message.length < 3) {
       return {
         reply:
-          "Could you tell me a little more about what you're looking for? I can help with adoptions, available pets, volunteering, donations, and shelter hours.",
+          "Could you tell me a little more about what you're looking for? I can help with adoptions, available pets, volunteering, donations, shelter hours, and animal medical history.",
       };
     }
 
@@ -66,6 +108,81 @@ export async function getChatReply(message: string) {
           "Happy Tails Animal Shelter is open Monday through Friday from 9 AM to 5 PM. If you're planning to visit, coming a little earlier can give you more time to meet the animals.",
       };
     }
+
+    if (intent === "medical") {
+  const animals = await getAllAnimals();
+  const matchedAnimal = findAnimalFromMessage(message, animals);
+
+  // CASE 1: user asked about a specific animal
+  if (matchedAnimal) {
+    const medicalLogs = await getMedicalLogsByAnimalId(matchedAnimal.animal_id);
+
+    if (!medicalLogs || medicalLogs.length === 0) {
+      return {
+        reply: `I couldn't find a medical history log for ${matchedAnimal.name} right now.`,
+      };
+    }
+
+    const latestLog = medicalLogs[0]!;
+
+    return {
+      reply: `${matchedAnimal.name}'s latest medical history entry:
+
+• Species: ${matchedAnimal.species ?? "Unknown"}
+• Entry type: ${formatMedicalLogType(latestLog.type)}
+• Created date: ${
+          latestLog.created_date
+            ? new Date(latestLog.created_date).toLocaleDateString()
+            : "Not available"
+        }
+• Description: ${latestLog.description ?? "No description available"}
+• Start date: ${
+          latestLog.start_date
+            ? new Date(latestLog.start_date).toLocaleDateString()
+            : "Not available"
+        }
+• End date: ${
+          latestLog.end_date
+            ? new Date(latestLog.end_date).toLocaleDateString()
+            : "Not available"
+        }`,
+    };
+  }
+
+  // CASE 2: user did NOT name an animal, so show animals that have medical history
+  const allMedicalLogs = await getAllIMedicalLog();
+
+  if (!allMedicalLogs || allMedicalLogs.length === 0) {
+    return {
+      reply: "I couldn't find any animals with medical history records right now.",
+    };
+  }
+
+  const animalIdsWithMedicalLogs = [...new Set(allMedicalLogs.map((log) => log.animal_id))];
+
+  const animalsWithMedicalLogs = animals.filter((animal) =>
+    animalIdsWithMedicalLogs.includes(animal.animal_id)
+  );
+
+  if (animalsWithMedicalLogs.length === 0) {
+    return {
+      reply: "I couldn't match any medical history records to animals right now.",
+    };
+  }
+
+  const animalList = animalsWithMedicalLogs
+    .slice(0, 10)
+    .map((animal) => `• ${animal.name} (${animal.species})`)
+    .join("\n");
+
+  return {
+    reply: `Here are the animals that currently have medical history records:
+
+${animalList}
+
+You can ask me about a specific animal too, like "What is Bella's medical history?"`,
+  };
+}
 
     if (intent === "animals") {
       const animals = await getAllAnimals();
@@ -102,7 +219,11 @@ export async function getChatReply(message: string) {
         .join("\n");
 
       return {
-        reply: `Here are a few animals you might want to check out:\n\n${animalList}\n\nLet me know if you'd like help finding a specific type of pet.`,
+        reply: `Here are a few animals you might want to check out:
+
+${animalList}
+
+Let me know if you'd like help finding a specific type of pet.`,
       };
     }
 
@@ -113,7 +234,7 @@ export async function getChatReply(message: string) {
 
     return {
       reply:
-        "I’m having a little trouble answering that right now, but I can still help with adoptions, available pets, volunteering, donations, and shelter hours.",
+        "I’m having a little trouble answering that right now, but I can still help with adoptions, available pets, volunteering, donations, shelter hours, and animal medical history.",
     };
   }
 }
