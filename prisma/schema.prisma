@@ -68,7 +68,7 @@ model medical_log {
   log_history_id Int       @id @default(autoincrement())
   animal_id      Int
   type           Int?
-  created_date   DateTime  @db.Date
+  created_date   DateTime  @db.Timestamp(6)
   user_id        BigInt
   description    String?   @db.VarChar(250)
   start_date     DateTime? @db.Date
