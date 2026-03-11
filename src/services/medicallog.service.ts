@@ -1,7 +1,7 @@
 import prisma from "../lib/prisma.js";
 
 export async function getAllIMedicalLog() {
-  return prisma.medical_log.findMany();
+  return prisma.medical_log.findMany({ orderBy: { created_date: "desc" } });
 }
 
 export async function getMedicalLogById(id: number) {
